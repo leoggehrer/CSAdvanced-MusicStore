@@ -23,7 +23,7 @@ Verbinden Sie die Abhängigkeiten der einzelnen Projekte untereinander.
 
 **Funktionsumfang** Laden Sie die csv-Daten in das Objektmodell und ermitteln Sie die statistischen Kennzahlen mit Linq.
 
-|Nr||Name|Beschreibung|
+|Nr|Name|Beschreibung|
 |---|---|---|
 |1.|*Artist und Album*|Geben Sie den Namen des Artisten und die Titeln der Alben aus.|
 |2.|*Artist und Titeln*|Geben Sie den Namen des Artisten und die Namen der Songs aus.|
