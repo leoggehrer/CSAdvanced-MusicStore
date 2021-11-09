@@ -20,7 +20,12 @@ namespace MusicStore.ConApp
             //PrintArtistAndAlbums(artists, albums);
             //PrintArtistAndTracks(artists, albums, tracks);
             //PrintArtistAndSongTime(artists, albums, tracks);
-            PrintAlbumAndSongs(albumModels);
+            //PrintAlbumAndSongs(albumModels);
+            //PrintAlbumAndTime(albumModels);
+            //PrintGenreAndTimes(genres, tracks);
+            //PrintAlbumAndSongTime(albums, tracks);
+            //PrintTrackAndSongTime(tracks);
+            PrintGenreAndCount(genres, tracks);
         }
 
         /// <summary>
@@ -89,7 +94,7 @@ namespace MusicStore.ConApp
                     });
         }
         /// <summary>
-        /// Prints the artists and the track times in [sec] on the console. 
+        /// Prints the album and the their tracks on the console. 
         /// </summary>
         /// <param name="albumModels">The full collection of albums</param>
         private static void PrintAlbumAndSongs(IEnumerable<Album> albumModels)
@@ -107,6 +112,85 @@ namespace MusicStore.ConApp
                               Console.WriteLine($"\tSong: {t.Name}");
                           });
                     });
+        }
+        /// <summary>
+        /// Prints the album and the album time in [sec] on the console. 
+        /// </summary>
+        /// <param name="albumModels">The full collection of albums</param>
+        private static void PrintAlbumAndTime(IEnumerable<Album> albumModels)
+        {
+            Console.WriteLine("Album -> Time [sec]");
+            Console.WriteLine("========================");
+
+            albumModels.ToList()
+                .ForEach(am =>
+                {
+                    Console.WriteLine($"Album: {am.Title} ({am.Artist.Name})");
+                    Console.WriteLine($"\tTime: {am.Tracks.Select(t => t.Milliseconds).Sum() / 1000:f}");
+                });
+        }
+        /// <summary>
+        /// Prints the genre and the average track time in [sec] on the console. 
+        /// </summary>
+        /// <param name="genres">The collection of genres</param>
+        /// <param name="tracks">The collection of tracks</param>
+        private static void PrintGenreAndTimes(IEnumerable<Genre> genres, IEnumerable<Track> tracks)
+        {
+            Console.WriteLine("Genre -> Time [sec]");
+            Console.WriteLine("========================");
+
+            genres.ToList()
+                  .ForEach(g =>
+                  {
+                      Console.WriteLine($"Genre: {g.Name}");
+                      Console.WriteLine($"\tTime: {tracks.Where(t => t.GenreId == g.Id).Select(t => t.Milliseconds).DefaultIfEmpty(0).Average() / 1000:f}");
+                  });
+        }
+        /// <summary>
+        /// Prints the album and the track times in [sec] on the console. 
+        /// </summary>
+        /// <param name="albums">The collection of albums</param>
+        /// <param name="tracks">The collection of tracks</param>
+        private static void PrintAlbumAndSongTime(IEnumerable<Album> albums, IEnumerable<Track> tracks)
+        {
+            Console.WriteLine("Album -> SongTime [sec]");
+            Console.WriteLine("========================");
+            albums.ToList()
+                  .ForEach(a =>
+                    {
+                        Console.WriteLine($"Album: {a.Title}");
+                        Console.WriteLine($"\tSongtime sum [sec]: {tracks.Where(t => t.AlbumId == a.Id).Select(t => t.Milliseconds).Sum() / 1000:f}");
+                        Console.WriteLine($"\tSongtime avg [sec]: {tracks.Where(t => t.AlbumId == a.Id).Select(t => t.Milliseconds).DefaultIfEmpty(0).Average() / 1000:f}");
+                    });
+        }
+        /// <summary>
+        /// Prints the track and the times in [sec] on the console. 
+        /// </summary>
+        /// <param name="tracks">The collection of tracks</param>
+        private static void PrintTrackAndSongTime(IEnumerable<Track> tracks)
+        {
+            Console.WriteLine("Track -> SongTime [sec]");
+            Console.WriteLine("========================");
+
+            Console.WriteLine($"\tSongtime sum [sec]: {tracks.Select(t => t.Milliseconds).Sum() / 1000:f}");
+            Console.WriteLine($"\tSongtime avg [sec]: {tracks.Select(t => t.Milliseconds).DefaultIfEmpty(0).Average() / 1000:f}");
+        }
+        /// <summary>
+        /// Prints the genre and the count on the console. 
+        /// </summary>
+        /// <param name="genres">The collection of genres</param>
+        /// <param name="tracks">The collection of tracks</param>
+        private static void PrintGenreAndCount(IEnumerable<Genre> genres, IEnumerable<Track> tracks)
+        {
+            Console.WriteLine("Genre -> Count");
+            Console.WriteLine("===============");
+
+            genres.ToList()
+                  .ForEach(g =>
+                  {
+                      Console.WriteLine($"Genre: {g.Name}");
+                      Console.WriteLine($"\tTime: {tracks.Where(t => t.GenreId == g.Id).Count()}");
+                  });
         }
     }
 }

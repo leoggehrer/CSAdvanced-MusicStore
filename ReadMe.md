@@ -32,7 +32,7 @@ Verbinden Sie die Abhängigkeiten der einzelnen Projekte untereinander.
 |*Album und Songzeit*|Geben Sie den Titel des Albums und die Songzeit in Sekunden [sec] aus.|
 |*Durchschnitt der Songzeit eines Genres*|Durchschnittliche Songzeit eines Genres in Sekunden.|
 |*Durchschnitt der Songzeit eines Album*|Durchschnittliche Songzeit eines Albums in Sekunden.|
-|*Durchschnitt der Songzeit eines Titels*|Durchschnittliche Songzeit eines Titels in Sekunden.|
+|*Songzeit und Durchschnitt der Titeln*|Die Gesamtzeit und den Durchschnitt der Songs in Sekunden.|
 |*Genre und Anzahl*|Geben Sie das Genre und die Anzahl der Titeln aus.|
 
 **Anmerkung**: Es darf nur Linq verwendet werden - keine Schleifen.
